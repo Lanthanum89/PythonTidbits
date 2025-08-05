@@ -42,8 +42,8 @@ while running:
     bird.y += int(bird_movement)  # Convert to int for Rect
 
     # Ground collision
-    if bird.bottom >= 600:
-        bird.bottom = 600
+    if bird.bottom >= SCREEN_HEIGHT:
+        bird.bottom = SCREEN_HEIGHT
         bird_movement = 0.0
 
     # Keep bird on screen (top boundary)
