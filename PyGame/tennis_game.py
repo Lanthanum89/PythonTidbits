@@ -51,15 +51,15 @@ while running:
     # Keep bat within screen boundaries
     if bat_y < 0:
         bat_y = 0
-    if bat_y > 600 - bat_height:
-        bat_y = 600 - bat_height
+    if bat_y > SCREEN_HEIGHT - bat_height:
+        bat_y = SCREEN_HEIGHT - bat_height
     
     # Move the ball
     ball_x += ball_speed_x
     ball_y += ball_speed_y
     
     # Ball collision with top and bottom walls
-    if ball_y <= ball_radius or ball_y >= 600 - ball_radius:
+    if ball_y <= ball_radius or ball_y >= SCREEN_HEIGHT - ball_radius:
         ball_speed_y = -ball_speed_y
     
     # Ball collision with right wall (reset ball)
