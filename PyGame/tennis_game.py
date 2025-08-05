@@ -92,5 +92,3 @@ pygame.quit()
 # 1. Make sure you have Python and Pygame installed.
 # 2. Save this script as `tennis_game.py`.
 # 3. Run the script using the command: python tennis_game.py
-
-# The bat is constrained to stay within the screen boundaries.
