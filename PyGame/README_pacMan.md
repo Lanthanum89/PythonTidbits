@@ -28,7 +28,7 @@ This is a basic implementation of a Pac-Man style game where players control a y
    pip install pygame
 
 3. Download the pacMan.py file
-Run the game:
+4. Run the game:
    ```bash
    python pacMan.py
 
