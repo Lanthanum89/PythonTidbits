@@ -34,9 +34,13 @@ Run the game:
 
 
 ## How to Play
+
 Movement: Use arrow keys to move Pac-Man
+
 Up Arrow: Move up
+
 Down Arrow: Move down
+
 Left Arrow: Move left
 Right Arrow: Move right
 Objective: Collect all white dots while avoiding the red ghosts
