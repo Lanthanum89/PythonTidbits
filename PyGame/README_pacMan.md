@@ -32,7 +32,7 @@ Run the game:
 python pacMan.py
    ```bash
    pip install pygame
-How to Play
+## How to Play
 Movement: Use arrow keys to move Pac-Man
 Up Arrow: Move up
 Down Arrow: Move down
