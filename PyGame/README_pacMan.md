@@ -32,11 +32,9 @@ This is a basic implementation of a Pac-Man style game where players control a y
    ```bash
    python pacMan.py
 
-Author
-Lanthanum89 
-
 License
 This project is available under the MIT License.
+
 ## How to Play
 - Movement: Use arrow keys to move Pac-Man
   - Up Arrow: Move up
@@ -70,10 +68,6 @@ This project is available under the MIT License.
 - Number of Dots: 20
 - Number of Ghosts: 4
 
-## Author
-- Lanthanum89
-
-## License
 - This project is available under the MIT License.
 
 ## Acknowledgments
