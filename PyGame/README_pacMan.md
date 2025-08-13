@@ -67,7 +67,6 @@ This project is available under the MIT License.
 - Number of Dots: 20
 - Number of Ghosts: 4
 
-- This project is available under the MIT License.
 
 ## Acknowledgments
 - Inspired by the classic Pac-Man arcade game created by Namco.
