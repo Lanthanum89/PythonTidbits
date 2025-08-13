@@ -38,7 +38,6 @@ Lanthanum89
 License
 This project is available under the MIT License.
 
-Acknowledgments
 ## How to Play
 - Movement: Use arrow keys to move Pac-Man
   - Up Arrow: Move up
