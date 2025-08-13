@@ -25,7 +25,7 @@ This is a basic implementation of a Pac-Man style game where players control a y
 1. Make sure you have Python installed on your system
 2. Install Pygame using pip:
 ```bash
-pip install pygame
+pip install pygame'''
 
 3. Download the pacMan.py file
 Run the game:
