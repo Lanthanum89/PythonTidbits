@@ -32,42 +32,8 @@ Run the game:
    ```bash
    python pacMan.py
 
-
-## How to Play
-
-Movement: Use arrow keys to move Pac-Man
-
-Up Arrow: Move up
-
-Down Arrow: Move down
-
-Left Arrow: Move left
-Right Arrow: Move right
-Objective: Collect all white dots while avoiding the red ghosts
-Scoring: Each dot is worth 10 points
-Game Over: Occurs when either:
-You collect all dots (You Win!)
-A ghost catches you (Game Over!)
-Exit Game: Press ESC key or close the window
-Game Elements
-Yellow Circle: Player (Pac-Man)
-Red Squares: Ghost enemies
-White Dots: Collectible items
-Score: Displayed in top-left corner
-Screen Size: 800x600 pixels
-Controls
-Arrow Keys: Move Pac-Man
-ESC: Quit game
-Close Window: Exit game
-Technical Details
-Screen Resolution: 800x600
-Frame Rate: 60 FPS
-Player Speed: 5 pixels per frame
-Ghost Speed: 3 pixels per frame
-Number of Dots: 20
-Number of Ghosts: 4
 Author
-Lanthanum89
+Lanthanum89 
 
 License
 This project is available under the MIT License.
