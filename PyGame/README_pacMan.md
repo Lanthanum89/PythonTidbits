@@ -29,9 +29,10 @@ This is a basic implementation of a Pac-Man style game where players control a y
 
 3. Download the pacMan.py file
 Run the game:
-python pacMan.py
    ```bash
-   pip install pygame
+   python pacMan.py
+
+
 ## How to Play
 Movement: Use arrow keys to move Pac-Man
 Up Arrow: Move up
