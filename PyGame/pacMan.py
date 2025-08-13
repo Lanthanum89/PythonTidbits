@@ -127,7 +127,7 @@ while running:
 
     # Game over text
     if game_over:
-        game_over_text = font.render('Game Over!' if dots else 'You Win!', True, WHITE)
+        game_over_text = font.render('You Win!' if not dots else 'Game Over!', True, WHITE)
         text_rect = game_over_text.get_rect(center=(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2))
         screen.blit(game_over_text, text_rect)
 
