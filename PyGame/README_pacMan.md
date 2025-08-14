@@ -33,6 +33,7 @@ This is a basic implementation of a Pac-Man style game where players control a y
 
 License
 This project is available under the MIT License.
+
 ## How to Play
 - Movement: Use arrow keys to move Pac-Man
   - Up Arrow: Move up
