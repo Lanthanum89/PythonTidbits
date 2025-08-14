@@ -26,11 +26,13 @@ This is a basic implementation of a Pac-Man style game where players control a y
 2. Install Pygame using pip:
    ```bash
    pip install pygame
-
 3. Download the pacMan.py file
 4. Run the game:
    ```bash
    python pacMan.py
+
+License
+This project is available under the MIT License.
 
 ## How to Play
 - Movement: Use arrow keys to move Pac-Man
@@ -65,7 +67,6 @@ This is a basic implementation of a Pac-Man style game where players control a y
 - Number of Dots: 20
 - Number of Ghosts: 4
 
-- This project is available under the MIT License.
 
 ## Acknowledgments
 - Inspired by the classic Pac-Man arcade game created by Namco.
