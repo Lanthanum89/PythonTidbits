@@ -25,30 +25,28 @@ screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 pygame.display.set_caption("Simple Pac-Man")
 clock = pygame.time.Clock()
 
-# Player
-player = pygame.Rect(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2, PLAYER_SIZE, PLAYER_SIZE)
-player_direction = 0  # Angle for pac-man's mouth
-
-# Ghosts
-ghosts = []
-for _ in range(4):  # Create 4 ghosts
-    x = random.randint(0, SCREEN_WIDTH - GHOST_SIZE)
-    y = random.randint(0, SCREEN_HEIGHT - GHOST_SIZE)
-    ghost = pygame.Rect(x, y, GHOST_SIZE, GHOST_SIZE)
-    ghosts.append({"rect": ghost, "dx": GHOST_SPEED, "dy": GHOST_SPEED})
-
-# Dots
-dots = []
-for _ in range(20):  # Create 20 dots
-    x = random.randint(0, SCREEN_WIDTH - DOT_SIZE)
-    y = random.randint(0, SCREEN_HEIGHT - DOT_SIZE)
-    dot = pygame.Rect(x, y, DOT_SIZE, DOT_SIZE)
-    dots.append(dot)
+def reset_game():
+    global player, player_direction, ghosts, dots, score, game_over
+    player = pygame.Rect(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2, PLAYER_SIZE, PLAYER_SIZE)
+    player_direction = 0
+    ghosts = []
+    for _ in range(4):
+        x = random.randint(0, SCREEN_WIDTH - GHOST_SIZE)
+        y = random.randint(0, SCREEN_HEIGHT - GHOST_SIZE)
+        ghost = pygame.Rect(x, y, GHOST_SIZE, GHOST_SIZE)
+        ghosts.append({"rect": ghost, "dx": GHOST_SPEED, "dy": GHOST_SPEED})
+    dots = []
+    for _ in range(20):
+        x = random.randint(0, SCREEN_WIDTH - DOT_SIZE)
+        y = random.randint(0, SCREEN_HEIGHT - DOT_SIZE)
+        dot = pygame.Rect(x, y, DOT_SIZE, DOT_SIZE)
+        dots.append(dot)
+    score = 0
+    game_over = False
 
 # Game variables
-score = 0
+reset_game()
 running = True
-game_over = False
 
 # Main game loop
 while running:
@@ -56,9 +54,11 @@ while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
-        if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
-            running = False
-
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_ESCAPE:
+                running = False
+            if game_over and event.key == pygame.K_SPACE:
+                reset_game()
 
     if not game_over:
         # Player movement
@@ -125,11 +125,14 @@ while running:
     score_text = font.render(f'Score: {score}', True, WHITE)
     screen.blit(score_text, (10, 10))
 
-    # Game over text
+    # Game over text and restart option
     if game_over:
         game_over_text = font.render('You Win!' if not dots else 'Game Over!', True, WHITE)
-        text_rect = game_over_text.get_rect(center=(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2))
+        text_rect = game_over_text.get_rect(center=(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 - 20))
         screen.blit(game_over_text, text_rect)
+        restart_text = font.render('Press SPACE to restart', True, WHITE)
+        restart_rect = restart_text.get_rect(center=(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 + 30))
+        screen.blit(restart_text, restart_rect)
 
     pygame.display.flip()
     clock.tick(60)
