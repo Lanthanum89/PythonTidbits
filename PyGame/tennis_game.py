@@ -2,6 +2,7 @@
 import pygame   
 import time
 import random  # Add this for random miss chance
+
 pygame.init()
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600
@@ -14,7 +15,7 @@ RED = (255, 0, 0)
 GREEN = (0, 255, 0)
 BLUE = (0, 0, 255)
 YELLOW = (255, 255, 0)
-PURPLE = (255, 0, 255)
+PURPLE = (204, 102, 255)  # Lightened background colour from default to improve visibility
 CYAN = (0, 255, 255)
 ORANGE = (255, 165, 0)
 
@@ -62,6 +63,9 @@ reset_countdown = 3  # seconds
 rounds_played = 0  # Track how many points have been scored
 
 miss_chance = 0.45  # Probability (0-1) that the computer will "miss" the ball per frame
+
+# Add a list to store ball particles
+particles = []
 
 running = True
 while running:
@@ -124,6 +128,13 @@ while running:
             ball_x += ball_speed_x
             ball_y += ball_speed_y
             
+            # Add a new particle at the ball's current position
+            particles.append({"x": int(ball_x), "y": int(ball_y), "radius": ball_radius // 3, "alpha": 255})
+
+            # Limit the number of particles for performance
+            if len(particles) > 30:
+                particles.pop(0)
+
             # Ball collision with top and bottom walls
             if ball_y <= ball_radius or ball_y >= SCREEN_HEIGHT - ball_radius:
                 ball_speed_y = -ball_speed_y
@@ -182,6 +193,21 @@ while running:
 
     # Drawing
     screen.fill(BACKGROUND_COLOR)
+
+    # Draw centre dashed line
+    dash_length = 20
+    gap_length = 20
+    for y in range(0, SCREEN_HEIGHT, dash_length + gap_length):
+        pygame.draw.rect(screen, WHITE, (SCREEN_WIDTH // 2 - 3, y, 6, dash_length))
+
+    # Draw ball particles (fading trail)
+    for p in particles:
+        # Fade out the particle
+        p["alpha"] = max(0, p["alpha"] - 12)
+        particle_surface = pygame.Surface((p["radius"]*2, p["radius"]*2), pygame.SRCALPHA)
+        pygame.draw.circle(particle_surface, (255, 255, 0, p["alpha"]), (p["radius"], p["radius"]), p["radius"])
+        screen.blit(particle_surface, (p["x"] - p["radius"], p["y"] - p["radius"]))
+
     # Draw player bat
     pygame.draw.rect(screen, BAT_COLOR, (bat_x, bat_y, bat_width, bat_height))
     # Draw opponent bat
