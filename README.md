@@ -23,7 +23,8 @@ The `PyGame/` directory contains graphical games built with PyGame:
 
 - **Tennis Game** - Classic Pong-style tennis game
 - **Balance Bird** - Bird balancing game
-- **Ping Pong** - Table tennis game
+- **Ping Pong** - simply a bouncing ball across the screen, my first ever pygame script...
+- **PacMan** - classic Pac-man inspired game 
 
 ## Quick Start
 
