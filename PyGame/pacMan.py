@@ -12,6 +12,7 @@ DOT_SIZE = 10
 GHOST_SIZE = 15
 PLAYER_SPEED = 5
 GHOST_SPEED = 1
+STARTING_LIVES = 3  # Number of lives
 
 # Colors
 BLACK = (0, 0, 0)
@@ -19,6 +20,11 @@ YELLOW = (255, 255, 0)
 WHITE = (255, 255, 255)
 RED = (255, 0, 0)
 BLUE = (0, 0, 255)
+PINK = (255, 105, 180)
+ORANGE = (255, 165, 0)
+CYAN = (0, 255, 255)
+
+GHOST_COLORS = [RED, PINK, ORANGE, CYAN]
 
 # Set up the display
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
@@ -26,15 +32,16 @@ pygame.display.set_caption("Simple Pac-Man")
 clock = pygame.time.Clock()
 
 def reset_game():
-    global player, player_direction, ghosts, dots, score, game_over
+    global player, player_direction, ghosts, dots, score, game_over, lives
     player = pygame.Rect(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2, PLAYER_SIZE, PLAYER_SIZE)
     player_direction = 0
     ghosts = []
-    for _ in range(4):
+    for i in range(4):
         x = random.randint(0, SCREEN_WIDTH - GHOST_SIZE)
         y = random.randint(0, SCREEN_HEIGHT - GHOST_SIZE)
         ghost = pygame.Rect(x, y, GHOST_SIZE, GHOST_SIZE)
-        ghosts.append({"rect": ghost, "dx": GHOST_SPEED, "dy": GHOST_SPEED})
+        color = GHOST_COLORS[i % len(GHOST_COLORS)]
+        ghosts.append({"rect": ghost, "dx": GHOST_SPEED, "dy": GHOST_SPEED, "color": color})
     dots = []
     for _ in range(20):
         x = random.randint(0, SCREEN_WIDTH - DOT_SIZE)
@@ -43,6 +50,12 @@ def reset_game():
         dots.append(dot)
     score = 0
     game_over = False
+    lives = STARTING_LIVES
+
+def reset_player_position():
+    global player, player_direction
+    player = pygame.Rect(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2, PLAYER_SIZE, PLAYER_SIZE)
+    player_direction = 0
 
 # Game variables
 reset_game()
@@ -94,7 +107,11 @@ while running:
 
             # Check ghost collision
             if player.colliderect(ghost["rect"]):
-                game_over = True
+                lives -= 1
+                if lives > 0:
+                    reset_player_position()
+                else:
+                    game_over = True
 
         # Dot collection
         for dot in dots[:]:  # Use slice copy to safely remove while iterating
@@ -113,9 +130,9 @@ while running:
     for dot in dots:
         pygame.draw.circle(screen, WHITE, (dot.centerx, dot.centery), DOT_SIZE // 2)
 
-    # Draw ghosts
+    # Draw ghosts (each with its own color)
     for ghost in ghosts:
-        pygame.draw.rect(screen, RED, ghost["rect"])
+        pygame.draw.rect(screen, ghost["color"], ghost["rect"])
 
     # Draw player (Pac-Man)
     pygame.draw.circle(screen, YELLOW, player.center, PLAYER_SIZE // 2)
@@ -125,9 +142,16 @@ while running:
     score_text = font.render(f'Score: {score}', True, WHITE)
     screen.blit(score_text, (10, 10))
 
+    # Draw lives
+    lives_text = font.render(f'Lives: {lives}', True, WHITE)
+    screen.blit(lives_text, (10, 50))
+
     # Game over text and restart option
     if game_over:
-        game_over_text = font.render('You Win!' if not dots else 'Game Over!', True, WHITE)
+        if not dots:
+            game_over_text = font.render('You Win!', True, WHITE)
+        else:
+            game_over_text = font.render('Game Over!', True, WHITE)
         text_rect = game_over_text.get_rect(center=(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 - 20))
         screen.blit(game_over_text, text_rect)
         restart_text = font.render('Press SPACE to restart', True, WHITE)
